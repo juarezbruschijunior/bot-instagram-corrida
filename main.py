@@ -11,10 +11,11 @@ import datetime
 import random
 import schedule
 
-# Garante suporte a UTF-8 e emojis no terminal Windows
-if sys.platform == "win32":
-    sys.stdout.reconfigure(encoding='utf-8')
-    sys.stderr.reconfigure(encoding='utf-8')
+# Garante envio imediato de logs para a tela do Render e suporte UTF-8
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', line_buffering=True)
     
     # Desativa o modo de seleção do Windows que congela o script ao clicar na tela preta
     try:

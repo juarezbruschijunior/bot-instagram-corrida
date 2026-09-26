@@ -123,9 +123,8 @@ def main():
     print("      👉 06:30 (Pico matinal dos corredores)")
     print("      👉 12:15 (Pico do almoço)")
     print("      👉 18:45 (Pico pós-treino da noite)")
-    print("   💬 Auto-Resposta de Comentários em Fotos e Reels (2x ao dia):")
-    print("      👉 10:30 (Manhã)")
-    print("      👉 19:30 (Noite)")
+    print("   💬 Auto-Resposta de Comentários em Fotos e Reels:")
+    print("      👉 A cada 30 minutos (Atendimento ágil 24/7)")
     
     # 1. Executa verificação inicial de comentários imediatamente na inicialização
     print("\n🔍 Realizando verificação inicial de comentários pendentes...")
@@ -139,9 +138,8 @@ def main():
     schedule.every().day.at("12:15").do(executar_ciclo_postagem)
     schedule.every().day.at("18:45").do(executar_ciclo_postagem)
     
-    # Agendamento de Respostas de Comentários (2x ao dia)
-    schedule.every().day.at("10:30").do(verificar_e_responder_comentarios)
-    schedule.every().day.at("19:30").do(verificar_e_responder_comentarios)
+    # Agendamento de Respostas de Comentários (A cada 30 minutos)
+    schedule.every(30).minutes.do(verificar_e_responder_comentarios)
     
     print("⏳ Bot 100% ativo e aguardando horários agendados de Brasília...")
     

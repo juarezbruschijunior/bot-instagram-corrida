@@ -115,6 +115,8 @@ def main():
     # Inicia servidor web em segundo plano para o Render
     threading.Thread(target=iniciar_servidor_web, daemon=True).start()
 
+    agora_br = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    print(f"\n⏰ [Relógio Sincronizado] Horário de Brasília atual: {agora_br}")
     print("🗓️ Grade de Automações Agendadas (Instagram & Facebook):")
     print("   📸 Postagens de Fotos & Reels com Trilha Sonora Eletrônica:")
     print("      👉 06:30 (Pico matinal dos corredores)")
@@ -123,11 +125,14 @@ def main():
     print("   💬 Auto-Resposta de Comentários em Fotos e Reels (2x ao dia):")
     print("      👉 10:30 (Manhã)")
     print("      👉 19:30 (Noite)")
-    print("\n💡 Comandos rápidos:")
-    print("   python main.py --reels      (Gera e publica 1 Reels com música agora)")
-    print("   python main.py --test       (Publica 1 post de foto agora)")
-    print("   python main.py --responder  (Verifica e responde comentários agora)\n")
     
+    # 1. Executa verificação inicial de comentários imediatamente na inicialização
+    print("\n🔍 Realizando verificação inicial de comentários pendentes...")
+    try:
+        verificar_e_responder_comentarios()
+    except Exception as e:
+        print(f"⚠️ Aviso na checagem inicial: {e}")
+
     # Agendamento de Postagens (3x ao dia)
     schedule.every().day.at("06:30").do(executar_ciclo_postagem)
     schedule.every().day.at("12:15").do(executar_ciclo_postagem)
@@ -137,7 +142,7 @@ def main():
     schedule.every().day.at("10:30").do(verificar_e_responder_comentarios)
     schedule.every().day.at("19:30").do(verificar_e_responder_comentarios)
     
-    print("⏳ Bot ativo e aguardando horários agendados... (Pressione Ctrl+C para parar)")
+    print("⏳ Bot 100% ativo e aguardando horários agendados de Brasília...")
     
     while True:
         schedule.run_pending()

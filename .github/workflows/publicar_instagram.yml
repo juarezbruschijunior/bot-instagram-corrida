@@ -1,0 +1,43 @@
+name: Bot Instagram BioTools - Agendador Automatico
+
+on:
+  schedule:
+    # Horários em UTC (Brasil é UTC-3):
+    # 06:30 BRT = 09:30 UTC
+    # 10:30 BRT = 13:30 UTC (Responder Comentários)
+    # 12:15 BRT = 15:15 UTC
+    # 18:45 BRT = 21:45 UTC
+    # 19:30 BRT = 22:30 UTC (Responder Comentários)
+    - cron: '30 9 * * *'
+    - cron: '30 13 * * *'
+    - cron: '15 15 * * *'
+    - cron: '45 21 * * *'
+    - cron: '30 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  executar_bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar Codigo
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Dependencias
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Executar Ciclo do Bot
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          LINK_PLANILHA: ${{ secrets.LINK_PLANILHA }}
+        run: |
+          python main.py --test
+          python main.py --responder

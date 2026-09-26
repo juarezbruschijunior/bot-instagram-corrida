@@ -22,6 +22,27 @@ if sys.platform == "win32":
     except Exception:
         pass
 
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(b"Bot Aline Manuela 24/7 Ativo e Rodando!")
+    def log_message(self, format, *args):
+        return # Silencia logs de requisições HTTP
+
+def iniciar_servidor_web():
+    porta = int(os.environ.get("PORT", 10000))
+    try:
+        server = HTTPServer(("0.0.0.0", porta), HealthCheckHandler)
+        print(f"🌐 Servidor Web de monitoramento ativo na porta {porta}!")
+        server.serve_forever()
+    except Exception as e:
+        print(f"⚠️ Aviso servidor web: {e}")
+
 from content_generator import gerar_post_e_prompt
 from image_generator import gerar_imagem_persona
 from reels_generator import gerar_reels_com_musica
@@ -84,6 +105,9 @@ def main():
         print("🔍 Modo de verificação de comentários selecionado.")
         verificar_e_responder_comentarios()
         return
+
+    # Inicia servidor web em segundo plano para o Render
+    threading.Thread(target=iniciar_servidor_web, daemon=True).start()
 
     print("🗓️ Grade de Automações Agendadas (Instagram & Facebook):")
     print("   📸 Postagens de Fotos & Reels com Trilha Sonora Eletrônica:")

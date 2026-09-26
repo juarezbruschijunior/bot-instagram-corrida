@@ -8,7 +8,14 @@ import PIL.Image
 if not hasattr(PIL.Image, 'ANTIALIAS'):
     PIL.Image.ANTIALIAS = PIL.Image.Resampling.LANCZOS
 
-from moviepy.editor import ImageClip, AudioFileClip
+try:
+    from moviepy.editor import ImageClip, AudioFileClip
+except Exception:
+    try:
+        from moviepy import ImageClip, AudioFileClip
+    except Exception:
+        from moviepy.video.VideoClip import ImageClip
+        from moviepy.audio.io.AudioFileClip import AudioFileClip
 
 BOT_DIR = os.path.dirname(__file__)
 POSTS_DIR = os.path.join(BOT_DIR, "posts_gerados")

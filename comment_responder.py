@@ -1,7 +1,11 @@
+import sys
 import os
 import json
 import requests
 import config
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 REPLIED_FILE = os.path.join(os.path.dirname(__file__), "comentarios_respondidos.json")
 
@@ -137,3 +141,6 @@ def verificar_e_responder_comentarios():
 
     except Exception as e:
         print(f"❌ Exceção ao checar comentários: {e}")
+
+if __name__ == "__main__":
+    verificar_e_responder_comentarios()

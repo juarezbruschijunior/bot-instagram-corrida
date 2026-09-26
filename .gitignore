@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+reels_gerados/
+posts_gerados/post_*
+posts_gerados/teste_*

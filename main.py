@@ -1,6 +1,12 @@
 import sys
 import os
 import time
+
+# Configura Fuso Horário de Brasília (America/Sao_Paulo) para servidores na nuvem
+if hasattr(time, 'tzset'):
+    os.environ['TZ'] = 'America/Sao_Paulo'
+    time.tzset()
+
 import datetime
 import random
 import schedule

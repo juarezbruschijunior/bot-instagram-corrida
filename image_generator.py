@@ -8,9 +8,10 @@ os.makedirs(POSTS_DIR, exist_ok=True)
 
 # Galeria Exclusiva da Aline em Porto Alegre (100% Real, Físico Atlético, Alta Definição)
 FOTOS_ALINE_POA = [
-    os.path.join(POSTS_DIR, "poa_orla_fit.jpg"),        # Orla do Guaíba - Treino Fit
-    os.path.join(POSTS_DIR, "poa_redencao.jpg"),        # Redenção / Açorianos - Alongando pós-treino
-    os.path.join(POSTS_DIR, "poa_pontal_sunset.jpg"),   # Pontal do Guaíba - Pôr do Sol
+    os.path.join(POSTS_DIR, "aline_agachamento_academia.jpg"), # Academia - Agachamento e Fortalecimento
+    os.path.join(POSTS_DIR, "poa_orla_fit.jpg"),                # Orla do Guaíba - Treino Fit
+    os.path.join(POSTS_DIR, "poa_redencao.jpg"),                # Redenção - Alongando pós-treino
+    os.path.join(POSTS_DIR, "poa_pontal_sunset.jpg"),           # Pontal do Guaíba - Pôr do Sol
 ]
 
 def fazer_upload_cdn(caminho_imagem):

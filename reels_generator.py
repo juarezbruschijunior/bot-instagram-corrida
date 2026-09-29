@@ -63,17 +63,23 @@ def gerar_reels_com_musica(caminho_foto, duracao=8):
     temp_frame = os.path.join(REELS_DIR, "frame_temp.jpg")
     pil_cropped.save(temp_frame, quality=95)
     
-    # 2. Selecionar áudio eletrônico fitness
+    # 2. Selecionar áudio eletrônico fitness aleatório
     audios = [os.path.join(AUDIO_DIR, f) for f in os.listdir(AUDIO_DIR) if f.endswith(".mp3")]
-    audio_path = audios[0] if audios else None
+    audio_path = random.choice(audios) if audios else None
     
     # 3. Montar clipe de vídeo com áudio
     clip = ImageClip(temp_frame).set_duration(duracao)
     
     if audio_path and os.path.exists(audio_path):
-        start_time = random.randint(10, 40)
-        audio = AudioFileClip(audio_path).subclip(start_time, start_time + duracao).audio_fadeout(1)
-        clip = clip.set_audio(audio)
+        print(f"🎵 [Trilha Sonora] Música eletrônica sorteada: {os.path.basename(audio_path)}")
+        try:
+            audio_full = AudioFileClip(audio_path)
+            max_start = max(0, int(audio_full.duration - duracao - 2))
+            start_time = random.randint(5, max(5, min(max_start, 45))) if max_start > 5 else 0
+            audio = audio_full.subclip(start_time, start_time + duracao).audio_fadeout(1)
+            clip = clip.set_audio(audio)
+        except Exception as e:
+            print(f"⚠️ Aviso no áudio: {e}")
     
     out_filename = f"reels_{random.randint(1000, 9999)}.mp4"
     out_path = os.path.join(REELS_DIR, out_filename)

@@ -34,12 +34,45 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 class HealthCheckHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path.startswith("/media/"):
+            filename = self.path[len("/media/"):].split("?")[0]
+            bot_dir = os.path.dirname(__file__)
+            path_posts = os.path.join(bot_dir, "posts_gerados", filename)
+            path_reels = os.path.join(bot_dir, "reels_gerados", filename)
+            
+            target_path = None
+            if os.path.exists(path_posts):
+                target_path = path_posts
+            elif os.path.exists(path_reels):
+                target_path = path_reels
+                
+            if target_path and os.path.isfile(target_path):
+                self.send_response(200)
+                if filename.lower().endswith((".jpg", ".jpeg")):
+                    self.send_header('Content-type', 'image/jpeg')
+                elif filename.lower().endswith(".png"):
+                    self.send_header('Content-type', 'image/png')
+                elif filename.lower().endswith(".mp4"):
+                    self.send_header('Content-type', 'video/mp4')
+                else:
+                    self.send_header('Content-type', 'application/octet-stream')
+                self.send_header('Content-Length', str(os.path.getsize(target_path)))
+                self.end_headers()
+                with open(target_path, "rb") as f:
+                    self.wfile.write(f.read())
+                return
+            else:
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(b"Arquivo nao encontrado")
+                return
+
         self.send_response(200)
         self.send_header('Content-type', 'text/plain; charset=utf-8')
         self.end_headers()
         self.wfile.write(b"Bot Aline Manuela 24/7 Ativo e Rodando!")
     def log_message(self, format, *args):
-        return # Silencia logs de requisições HTTP
+        return # Silencia logs de requisicoes HTTP
 
 def iniciar_servidor_web():
     porta = int(os.environ.get("PORT", 10000))

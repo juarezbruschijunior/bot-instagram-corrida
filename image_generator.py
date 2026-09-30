@@ -92,19 +92,33 @@ def obter_proxima_foto_aline():
 
 def fazer_upload_cdn(caminho_imagem):
     """
-    Faz upload temporário da imagem local para gerar link direto .jpg exigido pela Meta / Instagram Graph API.
+    Entrega a URL pública direta da imagem.
+    Prioriza a URL do servidor Render (estável e sem limites) com fallback para CDN Catbox.
     """
+    nome_arquivo = os.path.basename(caminho_imagem)
+    url_render = f"https://bot-instagram-corrida.onrender.com/media/{nome_arquivo}"
+    
+    # Testa se o servidor Render já responde por este arquivo
+    try:
+        r = requests.head(url_render, timeout=5)
+        if r.status_code == 200:
+            return url_render
+    except Exception:
+        pass
+
+    # Fallback para Catbox
     try:
         url = "https://catbox.moe/user/api.php"
         with open(caminho_imagem, "rb") as f:
             files = {"fileToUpload": f}
             data = {"reqtype": "fileupload"}
-            resp = requests.post(url, files=files, data=data, timeout=30)
+            resp = requests.post(url, files=files, data=data, timeout=15)
             if resp.status_code == 200 and resp.text.startswith("http"):
                 return resp.text.strip()
     except Exception as e:
-        print(f"⚠️ Erro ao enviar foto para o servidor CDN: {e}")
-    return None
+        print(f"⚠️ Erro ao enviar foto para CDN secundário: {e}")
+        
+    return url_render
 
 def gerar_imagem_persona(image_prompt=None, filename="post_imagem.jpg"):
     """
@@ -114,11 +128,10 @@ def gerar_imagem_persona(image_prompt=None, filename="post_imagem.jpg"):
     foto_local = obter_proxima_foto_aline()
     
     if not foto_local or not os.path.exists(foto_local):
-        # Fallback de segurança se necessário
         fallback_url = "https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1080&auto=format&fit=crop"
         return fallback_url, None
 
-    print("☁️ Fazendo upload em alta definição para publicação...")
+    print("☁️ Preparando link em alta definição para publicação...")
     cdn_url = fazer_upload_cdn(foto_local)
     
     if cdn_url:

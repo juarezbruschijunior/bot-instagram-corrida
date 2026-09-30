@@ -16,7 +16,7 @@ PACOTE_POSTS_CINEMA = [
     {
         "id": "interestelar",
         "filme": "Interestelar (2014)",
-        "imagem": "cinema_interestelar.jpg",
+        "imagem": "cinema_interestelar_apresentadora.jpg",
         "caption": """🌊 **Você sabia que o barulho de fundo dessa cena conta o tempo real na Terra?**
 
 Na clássica cena do Planeta de Miller em *Interestelar (2014)*, um detalhe nos bastidores do áudio de Christopher Nolan e Hans Zimmer passou despercebido por 99% das pessoas:
@@ -37,7 +37,7 @@ Quando Cooper e Brand retornam para a nave e descobrem que se passaram **23 anos
     {
         "id": "batman_cavaleiro_trevas",
         "filme": "Batman: O Cavaleiro das Trevas (2008)",
-        "imagem": "cinema_batman_cavaleiro_trevas.jpg",
+        "imagem": "cinema_batman_apresentadora.jpg",
         "caption": """🃏 **O improviso lendário de Heath Ledger que não estava no roteiro do Batman!**
 
 Na cena em que o Coringa está preso na delegacia de Gotham e o Comissário Gordon é promovido, todos os policiais começam a aplaudir. De repente, o Coringa começa a bater palmas de forma lenta, sarcástica e perturbadora. 👏
@@ -56,7 +56,7 @@ Aquilo **NÃO estava no roteiro original!** Foi uma ideia 100% espontânea de He
     {
         "id": "matrix",
         "filme": "Matrix (1999)",
-        "imagem": "cinema_matrix.jpg",
+        "imagem": "cinema_matrix_apresentadora.jpg",
         "caption": """🟢 **Você sabe o que realmente está escrito no famoso código verde de Matrix?**
 
 Aquela clássica cascata de símbolos verdes que abre a trilogia *Matrix* parece uma sequência indecifrável de criptografia hacker ultra-avançada... Mas a verdade vai te surpreender! 💻
@@ -75,7 +75,7 @@ Portanto, quando Neo e Morpheus estão olhando para a tela cheia de códigos mis
     {
         "id": "peaky_blinders",
         "filme": "Peaky Blinders",
-        "imagem": "cinema_peaky_blinders.jpg",
+        "imagem": "cinema_peaky_apresentadora.jpg",
         "caption": """🥃 **Quantos cigarros Thomas Shelby realmente fumou em Peaky Blinders?**
 
 Quem assiste a *Peaky Blinders* sabe que o líder dos Blinders praticamente não passa um minuto em cena sem um cigarro aceso na boca. Mas você já parou para pensar na saúde do ator Cillian Murphy? 🚬
@@ -94,7 +94,7 @@ Para não prejudicar a saúde do ator, a equipe de figurino usava **cigarros 100
     {
         "id": "senhor_dos_aneis",
         "filme": "O Senhor dos Anéis (2002)",
-        "imagem": "cinema_senhor_dos_aneis.jpg",
+        "imagem": "cinema_senhor_aneis_apresentadora.jpg",
         "caption": """🗡️ **O grito real de agonia de Aragorn em O Senhor dos Anéis: As Duas Torres!**
 
 Em uma cena emocionante onde Aragorn acredita que Merry e Pippin foram mortos pelos Orcs, ele chuta com toda a força um capacete de ferro pesado e solta um grito desesperador caindo de joelhos. 💥

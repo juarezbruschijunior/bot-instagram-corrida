@@ -2,120 +2,142 @@ import json
 import random
 import config
 
-TEMAS_BIOTOOLS_FOLLOWER_BOOST = [
+TEMAS_CINEMA_CURIOSIDADES = [
     {
-        "tema": "Como baixar seu Pace nos 5km (Do 6:00 para o 4:50)",
-        "caption": """⏱️ Quer baixar seu tempo nos 5km e sair daquele pace travado?
+        "filme": "Jornada nas Estrelas (Star Trek)",
+        "subtitulo": "O beijo que desafiou a censura na TV em 1968",
+        "caption": """🖖 **Você sabia que Jornada nas Estrelas mudou a história do mundo em 1968?**
 
-Muita gente acha que para correr mais rápido basta "tentar correr forte" todo dia... Mas a verdade é que isso só traz cansaço e lesão! 
+Nos bastidores da série clássica de *Star Trek*, William Shatner (Capitão Kirk) e Nichelle Nichols (Tenente Uhura) gravaram o que se tornaria o primeiro beijo inter-racial da história da televisão americana! 📺✨
 
-O segredo está em variar os estímulos na semana:
-1️⃣ 1x Treino intervalado (tiros curtos de 400m a 800m)
-2️⃣ 1x Treino de ritmo / limiar (no ritmo que você quer sustentar na prova)
-3️⃣ 1x Rodagem leve regenerativa (para construir base aeróbica)
-4️⃣ 1x Longão no fim de semana
+Com medo da censura da época, os executivos da emissora exigiram que fosse gravada uma versão alternativa *sem o beijo*. Mas sabe o que William Shatner fez? Ele errou de propósito e fez caretas em TODAS as tomadas sem beijo, forçando a emissora a exibir a versão histórica com o beijo no ar!
 
-📊 Eu controlo todos os meus ritmos na **Planilha da BioTools**. Ela calcula os paces exatos para cada treino e você recebe sua planilha completa de 4 semanas por **apenas R$ 37,90**!
-
-👉 Quer evoluir de verdade? Clique no **link da minha bio** e garanta a sua planilha!
-🔗 https://biotoolspremium.com.br/#physiological-tools-section
+🤯 Martin Luther King Jr. chegou a ligar pessoalmente para Nichelle Nichols pedindo para ela nunca desistir da série, pois ela era um símbolo vivo de conquista e inspiração para milhões.
 
 ━━━━━━━━━━━━━━━━━━━━━
-🏃‍♀️ **Gostou da dica? Siga @alin_emanuela para receber treinos e motivação diária de corrida de rua!**
-📌 *Salve este post para consultar antes do seu treino de amanhã!*
-💬 *Me conta aqui nos comentários: qual é o seu pace médio nos 5km hoje?* 👇🔥
+🎬 **Gostou da curiosidade? Siga @alin_emanuela para descobrir os maiores segredos do cinema e das séries todos os dias!**
+📌 *Salve este post para compartilhar com aquele amigo que ama ficção científica!*
+💬 *Qual é a sua série de ficção favorita de todos os tempos? Comenta aqui embaixo!* 👇🔥
 
-#corridaderua #pace5km #treinodecorrida #biotools #planilhadecorrida #portoalegre #corredores #viciadosemcorrida #mulheresquecorrem #loucosporcorrida"""
+#startrek #jornadanasestrelas #curiosidadesdefilmes #cinema #seriesclassicas #ficcaocientifica #hollywood #bastidores #nerdbrasil #filmeseseries #cinefilos"""
     },
     {
-        "tema": "Adeus Assessoria Cara: Periodização Completa por R$ 37,90",
-        "caption": """🏃‍♀️ Você realmente precisa gastar R$ 200/mês em assessoria para ter resultados na corrida?
+        "filme": "Interestelar (2014)",
+        "subtitulo": "A física real por trás da cena do buraco negro",
+        "caption": """🌊 **Você sabia que o barulho de fundo dessa cena conta o tempo real na Terra?**
 
-Muita gente desiste de treinar com método porque acha que assessoria esportiva é inacessível... Mas hoje você pode ter uma **periodização científica de 4 semanas** no seu celular por uma fração desse valor!
+Na clássica cena do Planeta de Miller em *Interestelar (2014)*, um detalhe nos bastidores do áudio de Christopher Nolan e Hans Zimmer passou despercebido por 99% das pessoas:
 
-💡 Na **BioTools**, você monta a sua planilha personalizada por **apenas R$ 37,90** (menos que uma pizza no fim de semana!).
+⏳ Aquele som de **tique-taque ritmado** que toca durante toda a cena acontece a cada **1,25 segundos**. Cada um desses "tiques" representa exatamente **um dia inteiro** se passando para nós na Terra, por conta da extrema dilatação gravitacional do buraco negro Gargantua!
 
-O que a planilha entrega para você:
-✅ Paces exatos de tiro, ritmo e rodagem calculados para o seu nível
-✅ Controle de volume semanal para evitar canelite e dor no joelho
-✅ Periodização para 5km, 10km, 21km ou emagrecimento
-✅ Acesso imediato no celular
+Quando Cooper e Brand retornam para a nave e descobrem que se passaram **23 anos na Terra**, para eles no planeta pareceram apenas **3 horas e 17 minutos**.
 
-👉 Pare de correr no escuro! Acesse o **link na minha bio** e monte sua planilha agora:
-🔗 https://biotoolspremium.com.br/#physiological-tools-section
+🤯 E tem mais: o astrofísico e vencedor do Nobel Kip Thorne calculou as equações científicas para renderizar o buraco negro, e o código do filme gerou novas descobertas na física teórica real!
 
 ━━━━━━━━━━━━━━━━━━━━━
-🏃‍♀️ **Siga @alin_emanuela para acompanhar minha rotina de treinos na Orla de Porto Alegre e dicas diárias!**
-📌 *Compartilhe esse post com aquele amigo que precisa começar a correr com você!*
-💬 *Qual a sua maior dificuldade na corrida hoje?* 👇
+🎬 **Siga @alin_emanuela para acompanhar curiosidades diárias sobre o mundo dos filmes e séries!**
+📌 *Salve este post e compartilhe com seu amigo cinéfilo!*
+💬 *Quantas vezes você já assistiu a Interestelar? Qual sua cena favorita?* 👇🚀
 
-#corridasaudavel #treinodecorrida #planilhadecorrida #biotools #5km #10km #amocorrer #corridaderuabrasil #focofitness #portoalegre"""
+#interestelar #cinema #filmes #curiosidadesdefilmes #seriesefilmes #christophernolan #cinefilos #bastidores #astronomia #hollywood #filmeseseries #netflixbrasil"""
     },
     {
-        "tema": "Prevenção de Lesões: O Maior Erro do Corredor",
-        "caption": """🛑 O motivo pelo qual 70% dos corredores sentem dores no joelho e canelite no primeiro mês!
+        "filme": "Batman: O Cavaleiro das Trevas (2008)",
+        "subtitulo": "O improviso genial de Heath Ledger na prisão",
+        "caption": """🃏 **O improviso lendário de Heath Ledger que não estava no roteiro do Batman!**
 
-O corpo humano não suporta aumentos bruscos de quilometragem. A regra de ouro é nunca aumentar mais de 10% do volume semanal de uma vez!
+Na cena em que o Coringa está preso na delegacia de Gotham e o Comissário Gordon é promovido, todos os policiais começam a aplaudir. De repente, o Coringa começa a bater palmas de forma lenta, sarcástica e perturbadora. 👏
 
-Com a ferramenta da **BioTools**, você tem uma periodização científica de 4 semanas ajustada para você por apenas **R$ 37,90**:
-✅ Volume semanal 100% controlado
-✅ Dias certos de descanso e intensidade para não sobrecarregar as articulações
-✅ Gráficos de evolução para acompanhar seu progresso
+Aquilo **NÃO estava no roteiro original!** Foi uma ideia 100% espontânea de Heath Ledger na hora da gravação. O diretor Christopher Nolan achou a atuação tão genial e sinistra que manteve a cena no corte final do filme.
 
-👟💨 Dê o próximo passo com segurança! O link para gerar sua planilha está disponível na minha **bio**!
-🔗 https://biotoolspremium.com.br/#physiological-tools-section
+💣 Além disso, Ledger passou semanas trancado sozinho em um quarto de hotel em Londres para criar a voz, a risada e os tiques do personagem em um diário macabro.
 
 ━━━━━━━━━━━━━━━━━━━━━
-🏃‍♀️ **Siga @alin_emanuela para mais dicas de saúde, ritmo e prevenção de lesões na corrida!**
-📌 *Salve esse post para lembrar da regra dos 10% no seu próximo planejamento!*
-💬 *Você já teve canelite ou dor no joelho correndo? Me conta nos comentários!* 👇
+🎬 **Siga @alin_emanuela para mais bastidores e segredos dos maiores clássicos do cinema!**
+📌 *Compartilhe esse post nos seus stories!*
+💬 *Na sua opinião, Heath Ledger fez o melhor Coringa da história do cinema?* 👇🦇
 
-#prevençãodelesões #canelite #dicasdecorrida #planilhadecorrida #biotools #corridaderua #corredoresiniciantes #viciadosemcorridaderua #saudeemovimento"""
+#batman #ocavaleirodastrevas #heathledger #coringa #joker #christophernolan #dccomics #cinema #curiosidadesdefilmes #bastidores #filmeseseries"""
     },
     {
-        "tema": "Motivação Matinal: Treino feito na Orla do Guaíba",
-        "caption": """☀️ 8km entregues na Orla do Guaíba com sensação de dever cumprido! ✨
+        "filme": "Matrix (1999)",
+        "subtitulo": "A verdade secreta sobre o código verde que cai na tela",
+        "caption": """🟢 **Você sabe o que realmente está escrito no famoso código verde de Matrix?**
 
-Sabe qual é a diferença entre quem desiste e quem evolui na corrida? **Ter um plano anotado.**
+Aquela clássica cascata de símbolos verdes que abre a trilogia *Matrix* parece uma sequência indecifrável de criptografia hacker ultra-avançada... Mas a verdade vai te surpreender! 💻
 
-Quando você acorda e já sabe exatamente o treino do dia na sua planilha (quantos km, qual o ritmo e quanto tempo), você não perde tempo pensando: você só calça o tênis e vai! 👟💨
+O designer de produção Simon Whiteley revelou anos depois que escaneou os símbolos direto dos **livros de receitas de sushi em japonês** da sua esposa! 🍣🥢
 
-🎯 Se você quer ter disciplina e método nos seus treinos neste mês, monte sua planilha de 4 semanas na **BioTools por apenas R$ 37,90** no link da minha bio!
+Portanto, quando Neo e Morpheus estão olhando para a tela cheia de códigos misteriosos, na verdade estão lendo receitas detalhadas de sushi, ramen e rolinhos primavera!
 
 ━━━━━━━━━━━━━━━━━━━━━
-🏃‍♀️ **Siga @alin_emanuela para receber sua dose diária de motivação e rotina de treinos!**
-📌 *Salve este post para se inspirar a sair da cama amanhã cedo!*
-💬 *Você é do time que corre de manhã cedo ou prefere treinar à noite?* 👇🔥
+🎬 **Siga @alin_emanuela para receber sua dose diária de curiosidades do cinema e da cultura pop!**
+📌 *Salve este post para lembrar desse fato hilário da próxima vez que rever Matrix!*
+💬 *Você tomaria a pílula azul ou a pílula vermelha? Deixe nos comentários!* 👇💊
 
-🔗 https://biotoolspremium.com.br/#physiological-tools-section
+#matrix #keanureeves #filmes #curiosidadesdefilmes #cinema #ficcaocientifica #cyberpunk #bastidores #nerd #geekbrasil #culturapop"""
+    },
+    {
+        "filme": "O Senhor dos Anéis (2002)",
+        "subtitulo": "O grito real de dor de Viggo Mortensen que ficou no filme",
+        "caption": """🗡️ **O grito real de agonia de Aragorn em O Senhor dos Anéis: As Duas Torres!**
 
-#treinomatinal #orladoguaiba #portoalegre #treinopago #corredora #mulheresquecorrem #corridaderua #biotools #planilhadecorrida #motivaçãofitness"""
+Em uma cena emocionante onde Aragorn acredita que Merry e Pippin foram mortos pelos Orcs, ele chuta com toda a força um capacete de ferro pesado e solta um grito desesperador caindo de joelhos. 💥
+
+Aquele grito **não foi atuação:** Viggo Mortensen realmente **quebrou dois dedos do pé** ao chutar o capacete de metal! Em vez de pedir para parar a gravação, ele usou a dor excruciante real na cena.
+
+O diretor Peter Jackson ficou tão impressionado com o profissionalismo de Viggo que aquela tomada exata foi a que foi para as telas dos cinemas do mundo todo!
+
+━━━━━━━━━━━━━━━━━━━━━
+🎬 **Siga @alin_emanuela para não perder as melhores histórias dos bastidores do cinema!**
+📌 *Salve o post e envie para um fã da Terra Média!*
+💬 *Qual é o seu filme favorito da trilogia O Senhor dos Anéis?* 👇🧝‍♂️
+
+#osenhordosaneis #lordoftherings #aragorn #viggomortensen #peterjackson #cinema #curiosidadesdefilmes #fantasia #hollywood #filmeseseries"""
+    },
+    {
+        "filme": "Peaky Blinders",
+        "subtitulo": "O segredo por trás dos cigarros de Thomas Shelby",
+        "caption": """🥃 **Quantos cigarros Thomas Shelby realmente fumou em Peaky Blinders?**
+
+Quem assiste a *Peaky Blinders* sabe que o líder dos Blinders praticamente não passa um minuto em cena sem um cigarro aceso na boca. Mas você já parou para pensar na saúde do ator Cillian Murphy? 🚬
+
+Como as gravações duravam meses e tinham vários ângulos por cena, Cillian Murphy revelou que fumava cerca de **1.000 cigarros por temporada**!
+
+Para não prejudicar a saúde do ator, a equipe de figurino usava **cigarros 100% de ervas naturais e pétalas de rosa**, completamente livres de tabaco e nicotina.
+
+━━━━━━━━━━━━━━━━━━━━━
+🎬 **Siga @alin_emanuela para acompanhar dicas e curiosidades das suas séries favoritas!**
+📌 *Salve este post no seu feed!*
+💬 *Qual é o seu personagem favorito em Peaky Blinders?* 👇🔥
+
+#peakyblinders #thomasshelby #cillianmurphy #seriesnetflix #curiosidadesdeseries #netflixbrasil #cinema #bbc #seriesefilmes"""
     }
 ]
 
 def gerar_post_e_prompt(tema=None):
     """
-    Gera legenda focada na venda da BioTools (R$ 37,90) + atração massiva de seguidores
-    e engajamento nos comentários.
+    Gera curiosidades de alto impacto sobre Filmes e Séries clássicas e modernas,
+    otimizadas para compartilhamento, retenção e atração de novos seguidores.
     """
     if config.GEMINI_API_KEY and "AIza" in config.GEMINI_API_KEY:
         try:
             from google import genai
             client = genai.Client(api_key=config.GEMINI_API_KEY)
             
-            prompt_sistema = f"""
-            Você é {config.PERSONA_NAME}, corredora de rua em Porto Alegre/RS e parceira oficial da BioTools.
-            Crie um post de alto engajamento para o Instagram com a seguinte estrutura:
+            prompt_sistema = """
+            Você é especialista em Cinema, Séries e Cultura Pop e redige conteúdos virais para o Instagram.
+            Crie um post de alto impacto e curiosidade fascinante sobre um grande filme ou série famosa (ex: Harry Potter, Oppenheimer, Breaking Bad, Stranger Things, Gladiador, Titanic, Vingadores, etc.).
             
-            1. TÍTULO IMPACTANTE com emojis na 1ª linha.
-            2. DICA PRÁTICA E ÚTIL de corrida (Pace, zonas de treino, tiros, prevenção de canelite ou motivação).
-            3. OFERTA DA BIOTOOLS: Planilha de 4 semanas por apenas R$ 37,90 no link da bio ({config.LINK_PLANILHA}).
-            4. GATILHO DE SEGUIDOR: '🏃‍♀️ Siga @alin_emanuela para dicas diárias de corrida de rua e motivação!'
-            5. GATILHO DE SALVAMENTO: '📌 Salve este post para consultar antes do treino!'
-            6. PERGUNTA DE ENGAJAMENTO para incentivar comentários (ex: 'Qual seu pace hoje?').
-            7. 8 a 10 hashtags estratégicas (#corridaderua, #pace5km, #biotools, #portoalegre, etc.).
+            Estrutura obrigatória:
+            1. TÍTULO IMPACTANTE com emojis e pergunta misteriosa na 1ª linha.
+            2. HISTÓRIA DE BASTIDORES ou FATO CIENTÍFICO/SECRETO contado de forma envolvente em 3 a 4 parágrafos curtos.
+            3. GATILHO DE SEGUIDOR: '🎬 Siga @alin_emanuela para descobrir os maiores segredos e bastidores do cinema todos os dias!'
+            4. GATILHO DE SALVAMENTO: '📌 Salve este post para compartilhar com os amigos!'
+            5. PERGUNTA DE ENGAJAMENTO para estimular debates nos comentários.
+            6. 8 a 12 hashtags estratégicas de cinema e séries (#cinema #curiosidadesdefilmes #filmeseseries #bastidores, etc.).
             
-            Retorne APENAS o texto formatado da legenda.
+            Retorne APENAS o texto pronto da legenda.
             """
             
             response = client.models.generate_content(
@@ -125,7 +147,7 @@ def gerar_post_e_prompt(tema=None):
             if response and response.text:
                 return {"caption": response.text.strip()}
         except Exception as e:
-            print(f"[Aviso Gemini]: {e}. Usando template de alta conversão de seguidores.")
+            print(f"[Aviso Gemini]: {e}. Usando template de curiosidades de cinema.")
 
-    escolhido = random.choice(TEMAS_BIOTOOLS_FOLLOWER_BOOST)
-    return {"caption": escolhido["caption"]}
+    escolhido = random.choice(TEMAS_CINEMA_CURIOSIDADES)
+    return {"caption": escolhido["caption"], "filme": escolhido.get("filme"), "subtitulo": escolhido.get("subtitulo")}

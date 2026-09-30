@@ -127,12 +127,12 @@ def executar_ciclo_postagem(forcar_reels=False):
 
 def main():
     print("="*65)
-    print(" 🏃‍♀️ BOT DE DIVULGAÇÃO & ATENDIMENTO (FOTOS + REELS COM MÚSICA)")
+    print(" 🎬 BOT DE CURIOSIDADES DO CINEMA & SÉRIES (4X AO DIA)")
     print("="*65)
     
     # Flags de teste manual
     if "--reels" in sys.argv:
-        print("🔍 Modo de teste de REELS COM MÚSICA ELETRÔNICA selecionado.")
+        print("🔍 Modo de teste de REELS selecionado.")
         executar_ciclo_postagem(forcar_reels=True)
         return
 
@@ -151,11 +151,12 @@ def main():
 
     agora_br = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     print(f"\n⏰ [Relógio Sincronizado] Horário de Brasília atual: {agora_br}")
-    print("🗓️ Grade de Automações Agendadas (Instagram & Facebook):")
-    print("   📸 Postagens de Fotos & Reels com Trilha Sonora Eletrônica:")
-    print("      👉 06:30 (Pico matinal dos corredores)")
-    print("      👉 12:15 (Pico do almoço)")
-    print("      👉 18:45 (Pico pós-treino da noite)")
+    print("🗓️ Grade de Automações Agendadas (4x ao Dia):")
+    print("   🎬 Postagens de Cinema, Séries & Bastidores:")
+    print("      👉 08:30 (Café da Manhã / Dica do Dia)")
+    print("      👉 12:30 (Pico do Almoço / Curiosidade Rápida)")
+    print("      👉 17:30 (Fim de Tarde / Estreias & Bastidores)")
+    print("      👉 21:15 (Horário Nobre da Noite / Cineclube)")
     print("   💬 Auto-Resposta de Comentários em Fotos e Reels:")
     print("      👉 A cada 30 minutos (Atendimento ágil 24/7)")
     
@@ -166,15 +167,16 @@ def main():
     except Exception as e:
         print(f"⚠️ Aviso na checagem inicial: {e}")
 
-    # Agendamento de Postagens (3x ao dia)
-    schedule.every().day.at("06:30").do(executar_ciclo_postagem)
-    schedule.every().day.at("12:15").do(executar_ciclo_postagem)
-    schedule.every().day.at("18:45").do(executar_ciclo_postagem)
+    # Agendamento de Postagens (4x ao dia)
+    schedule.every().day.at("08:30").do(executar_ciclo_postagem)
+    schedule.every().day.at("12:30").do(executar_ciclo_postagem)
+    schedule.every().day.at("17:30").do(executar_ciclo_postagem)
+    schedule.every().day.at("21:15").do(executar_ciclo_postagem)
     
     # Agendamento de Respostas de Comentários (A cada 30 minutos)
     schedule.every(30).minutes.do(verificar_e_responder_comentarios)
     
-    print("⏳ Bot 100% ativo e aguardando horários agendados de Brasília...")
+    print("⏳ Bot de Cinema 100% ativo e aguardando horários agendados de Brasília...")
     
     while True:
         schedule.run_pending()

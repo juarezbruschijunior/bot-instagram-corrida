@@ -16,39 +16,27 @@ HISTORICO_FILE = os.path.join(BOT_DIR, "historico_fotos_postadas.json")
 
 os.makedirs(POSTS_DIR, exist_ok=True)
 
-# Catálogo Oficial e 100% Consistente da Persona Aline Manuela (Físico Atlético, Realista, Alta Resolução)
-FOTOS_ALINE_CATALOGO = [
-    # 🏃‍♀️ CORRIDA DE RUA, ESTEIRA & PISTA
-    "aline_corrida_orla.jpg",          # Corrida na Orla do Guaíba / Gasômetro ao amanhecer
-    "aline_corrida_subida.jpg",        # Treino de corrida em subida na cidade
-    "aline_corrida_ponte_rio.jpg",     # Corrida com pôr do sol na ponte/orla com vista para o Beira-Rio
-    "aline_esteira_academia.jpg",       # Treino de velocidade na esteira ergométrica da academia
-    "aline_pista_atletismo.jpg",        # Treino de velocidade e tiros na pista de atletismo
-    "aline_amarrando_tenis.jpg",        # Parque da Redenção preparando o tênis de corrida
-    "aline_smartwatch_pace.jpg",        # Conferindo pace e batimentos no smartwatch
-    "aline_medalha_corrida.jpg",        # Comemorando com a medalha de 10k na linha de chegada
-
-    # 🏋️‍♀️ FORTALECIMENTO & MUSCULAÇÃO
-    "aline_musculacao_leg_press.jpg",   # Fortalecimento de pernas no Leg Press
-    "aline_halteres_academia.jpg",      # Treino de força e fortalecimento muscular com halteres
-    "aline_agachamento_academia.jpg",   # Agachamento e treino de pernas na academia
-    "aline_remada_baixa_costas.jpg",    # Remada baixa no cabo para postura de corrida
-    "aline_prancha_abdominal.jpg",      # Prancha isométrica no colchonete no parque
-    "aline_alongamento_parque.jpg",     # Alongamento e mobilidade ao ar livre no parque
-    "aline_pos_treino_relax.jpg",       # Recuperação muscular com rolo no colchonete
-
-    # 🥗 ALIMENTAÇÃO & NUTRIÇÃO SAUDÁVEL
-    "aline_nutricao_pre_treino.jpg",    # Café pré-treino e alimentação saudável
-    "aline_cafe_da_manha_panqueca.jpg", # Panquecas de aveia e frutas vermelhas saudáveis
-    "aline_prato_saudavel_almoco.jpg",  # Almoço saudável e nutritivo com salada bowl
-    "aline_smoothie_preparacao.jpg",    # Preparando smoothie verde saudável na cozinha
-    "aline_hidratacao_pos_treino.jpg",   # Hidratação com garrafa d'água no parque pós-treino
-
-    # 📸 POSES ESTILO INSTAGRAM & LIFESTYLE
-    "aline_selfie_espelho_academia.jpg", # Selfie de espelho na academia com look fitness
-    "aline_pose_orla_lifestyle.jpg",    # Pose estilo Instagram na Orla ao pôr do sol com óculos
-    "aline_pose_calcadao_fit.jpg",      # Pose fitness de corpo inteiro no calçadão do parque
-    "aline_pose_academia.jpg",          # Pose confiante pós-treino na academia
+# Catálogo de Curiosidades do Cinema & Séries com a Apresentadora Oficial e Pôsteres
+FOTOS_CINEMA_CATALOGO = [
+    # 🎬 BASTIDORES & CURIOSIDADES COM A APRESENTADORA E CENAS CLÁSSICAS
+    "cinema_star_trek_apresentadora.jpg",  # Star Trek - O Beijo Histórico que desafiou a censura
+    "cinema_interestelar.jpg",             # Interestelar - A física real do buraco negro
+    
+    # 🏃‍♀️ GALERIA FITNESS & LIFESTYLE DA APRESENTADORA
+    "aline_selfie_espelho_academia.jpg",
+    "aline_pose_orla_lifestyle.jpg",
+    "aline_corrida_orla.jpg",
+    "aline_prato_saudavel_almoco.jpg",
+    "aline_smoothie_preparacao.jpg",
+    "aline_esteira_academia.jpg",
+    "aline_cafe_da_manha_panqueca.jpg",
+    "aline_musculacao_leg_press.jpg",
+    "aline_medalha_corrida.jpg",
+    "aline_remada_baixa_costas.jpg",
+    "aline_prancha_abdominal.jpg",
+    "aline_smartwatch_pace.jpg",
+    "aline_pose_calcadao_fit.jpg",
+    "aline_pos_treino_relax.jpg",
 ]
 
 def carregar_historico():
@@ -71,15 +59,14 @@ def salvar_historico(historico):
 
 def obter_proxima_foto_aline():
     """
-    Sistema inteligente de rotação anti-repetição:
-    Garante que CADA post use uma foto DIFERENTE da mesma persona Aline Manuela.
-    Nunca repete uma foto até que todas as fotos do catálogo tenham sido publicadas.
+    Sistema inteligente de rotação anti-repetição para Cinema & Séries.
+    Garante que CADA post use uma foto/pôster DIFERENTE da apresentadora e das curiosidades.
     """
     historico = carregar_historico()
     
     # Filtra fotos que existem fisicamente no disco
     fotos_existentes = [
-        f for f in FOTOS_ALINE_CATALOGO 
+        f for f in FOTOS_CINEMA_CATALOGO 
         if os.path.exists(os.path.join(POSTS_DIR, f))
     ]
     
@@ -93,28 +80,29 @@ def obter_proxima_foto_aline():
     # Se todas as fotos do catálogo já foram postadas, reinicia o ciclo
     if not fotos_nao_postadas:
         ultima_postada = historico[-1] if historico else None
-        print("🔄 Todas as fotos do catálogo da Aline foram publicadas! Reiniciando ciclo de rotação...")
-        # Evita que a primeira do novo ciclo seja igual à última postada
+        print("🔄 Todas as fotos do catálogo foram publicadas! Reiniciando ciclo de rotação...")
         candidatas = [f for f in fotos_existentes if f != ultima_postada] or fotos_existentes
         foto_escolhida = random.choice(candidatas)
         historico = [foto_escolhida]
     else:
-        foto_escolhida = random.choice(fotos_nao_postadas)
+        # Se for o início, prioriza as novas de cinema
+        if "cinema_star_trek_apresentadora.jpg" in fotos_nao_postadas:
+            foto_escolhida = "cinema_star_trek_apresentadora.jpg"
+        else:
+            foto_escolhida = random.choice(fotos_nao_postadas)
         historico.append(foto_escolhida)
 
     salvar_historico(historico)
     
     posicao = len(historico)
     total = len(fotos_existentes)
-    print(f"📸 [Rotação Anti-Repetição] Foto selecionada: {foto_escolhida} (Foto {posicao}/{total} do ciclo da Aline)")
+    print(f"📸 [Rotação Anti-Repetição Cinema] Foto selecionada: {foto_escolhida} (Post {posicao}/{total} do ciclo)")
     
     return os.path.join(POSTS_DIR, foto_escolhida)
 
 def fazer_upload_cdn(caminho_imagem):
     """
-    Entrega a URL pública direta da imagem.
-    Utiliza a CDN oficial do GitHub (Raw) que possui 100% de disponibilidade,
-    velocidade máxima e é aceita nativamente pela Meta / Instagram Graph API.
+    Entrega a URL pública direta da imagem via GitHub Raw CDN.
     """
     nome_arquivo = os.path.basename(caminho_imagem)
     url_github = f"https://raw.githubusercontent.com/juarezbruschijunior/bot-instagram-corrida/main/posts_gerados/{nome_arquivo}"
@@ -123,12 +111,12 @@ def fazer_upload_cdn(caminho_imagem):
 def gerar_imagem_persona(image_prompt=None, filename="post_imagem.jpg"):
     """
     Ponto de entrada chamado pelo publicador:
-    Seleciona a próxima foto inédita da Aline, envia para CDN e retorna a URL pronta.
+    Seleciona a próxima foto inédita de cinema/apresentadora, envia para CDN e retorna a URL pronta.
     """
     foto_local = obter_proxima_foto_aline()
     
     if not foto_local or not os.path.exists(foto_local):
-        fallback_url = "https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1080&auto=format&fit=crop"
+        fallback_url = "https://raw.githubusercontent.com/juarezbruschijunior/bot-instagram-corrida/main/posts_gerados/cinema_star_trek_apresentadora.jpg"
         return fallback_url, None
 
     print("☁️ Preparando link em alta definição para publicação...")

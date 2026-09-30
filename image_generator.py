@@ -18,10 +18,11 @@ os.makedirs(POSTS_DIR, exist_ok=True)
 
 # Catálogo Oficial e 100% Consistente da Persona Aline Manuela (Físico Atlético, Realista, Alta Resolução)
 FOTOS_ALINE_CATALOGO = [
-    # 🏃‍♀️ CORRIDA DE RUA & PISTA
+    # 🏃‍♀️ CORRIDA DE RUA, ESTEIRA & PISTA
     "aline_corrida_orla.jpg",          # Corrida na Orla do Guaíba / Gasômetro ao amanhecer
     "aline_corrida_subida.jpg",        # Treino de corrida em subida na cidade
     "aline_corrida_ponte_rio.jpg",     # Corrida com pôr do sol na ponte/orla com vista para o Beira-Rio
+    "aline_esteira_academia.jpg",       # Treino de velocidade na esteira ergométrica da academia
     "aline_pista_atletismo.jpg",        # Treino de velocidade e tiros na pista de atletismo
     "aline_amarrando_tenis.jpg",        # Parque da Redenção preparando o tênis de corrida
     "aline_smartwatch_pace.jpg",        # Conferindo pace e batimentos no smartwatch
@@ -31,11 +32,14 @@ FOTOS_ALINE_CATALOGO = [
     "aline_musculacao_leg_press.jpg",   # Fortalecimento de pernas no Leg Press
     "aline_halteres_academia.jpg",      # Treino de força e fortalecimento muscular com halteres
     "aline_agachamento_academia.jpg",   # Agachamento e treino de pernas na academia
+    "aline_remada_baixa_costas.jpg",    # Remada baixa no cabo para postura de corrida
+    "aline_prancha_abdominal.jpg",      # Prancha isométrica no colchonete no parque
     "aline_alongamento_parque.jpg",     # Alongamento e mobilidade ao ar livre no parque
     "aline_pos_treino_relax.jpg",       # Recuperação muscular com rolo no colchonete
 
     # 🥗 ALIMENTAÇÃO & NUTRIÇÃO SAUDÁVEL
     "aline_nutricao_pre_treino.jpg",    # Café pré-treino e alimentação saudável
+    "aline_cafe_da_manha_panqueca.jpg", # Panquecas de aveia e frutas vermelhas saudáveis
     "aline_prato_saudavel_almoco.jpg",  # Almoço saudável e nutritivo com salada bowl
     "aline_smoothie_preparacao.jpg",    # Preparando smoothie verde saudável na cozinha
     "aline_hidratacao_pos_treino.jpg",   # Hidratação com garrafa d'água no parque pós-treino

@@ -8,6 +8,7 @@ os.makedirs(POSTS_DIR, exist_ok=True)
 
 # Galeria Exclusiva da Aline em Porto Alegre (100% Real, Físico Atlético, Alta Definição)
 FOTOS_ALINE_POA = [
+    os.path.join(POSTS_DIR, "aline_pose_academia.jpg"),        # Academia - Pose Confiante Pós-Treino
     os.path.join(POSTS_DIR, "aline_agachamento_academia.jpg"), # Academia - Agachamento e Fortalecimento
     os.path.join(POSTS_DIR, "poa_orla_fit.jpg"),                # Orla do Guaíba - Treino Fit
     os.path.join(POSTS_DIR, "poa_redencao.jpg"),                # Redenção - Alongando pós-treino

@@ -2,10 +2,13 @@ import sys
 import os
 import json
 import requests
+import random
 import config
 
 if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 REPLIED_FILE = os.path.join(os.path.dirname(__file__), "comentarios_respondidos.json")
 
@@ -27,7 +30,7 @@ def salvar_comentarios_respondidos(respondidos):
 
 def gerar_resposta_ia(texto_comentario, autor):
     """
-    Usa o Google Gemini para criar uma resposta natural, amigável e esportiva.
+    Usa o Google Gemini para criar uma resposta natural, envolvente e apaixonada por cinema.
     """
     if config.GEMINI_API_KEY and "AIza" in config.GEMINI_API_KEY:
         try:
@@ -35,14 +38,15 @@ def gerar_resposta_ia(texto_comentario, autor):
             client = genai.Client(api_key=config.GEMINI_API_KEY)
             
             prompt = f"""
-            Você é {config.PERSONA_NAME}, uma corredora de rua brasileira simpática, motivadora e parceira da BioTools.
-            Um seguidor chamado @{autor} acabou de comentar no seu post:
+            Você é {config.PERSONA_NAME}, apresentadora e criadora de conteúdo do canal de Cinema & Séries no Instagram.
+            Um seguidor chamado @{autor} comentou no seu post de curiosidades:
             "{texto_comentario}"
             
             Crie uma resposta curta (1 a 3 frases) com emojis:
-            - Seja calorosa e atenciosa.
-            - Responda à dúvida ou agradeça o carinho.
-            - Se fizer sentido, faça uma pergunta sobre a rotina de corrida dele(a) ou mencione a planilha BioTools (link na bio).
+            - Seja simpática, cinéfila e empolgada.
+            - Responda à opinião ou dúvida dele(a) sobre o filme/série.
+            - Faça uma pergunta de volta sobre filmes favoritos para gerar ainda mais engajamento.
+            - Convide para acompanhar os próximos posts diários.
             - Retorne APENAS o texto da resposta.
             """
             
@@ -55,21 +59,21 @@ def gerar_resposta_ia(texto_comentario, autor):
         except Exception as e:
             print(f"⚠️ Erro no Gemini ao gerar resposta: {e}")
 
-    # Respostas padrões inteligentes
+    # Respostas padrões inteligentes de cinema
     respostas_padrao = [
-        f"Obrigada pelo carinho, @{autor}! 🏃‍♀️✨ Já treinou hoje ou vai mais tarde? Se precisar de planilha, o link tá na bio!",
-        f"Valeu demais, @{autor}! 🔥 Foco nos treinos! Se quiser estruturar suas 4 semanas, dá uma olhada no link da bio!",
-        f"Tamo junto na corrida, @{autor}! 👟💨 Bons treinos e qualquer dúvida sobre a planilha me chama!"
+        f"Demais, né @{autor}? 🎬🍿 Esse filme tem muitos segredos incríveis nos bastidores! Qual outro filme você quer ver aqui no canal?",
+        f"Sensacional, @{autor}! 🔥 Obrigado por acompanhar! Fica ligado que todo dia tem curiosidades novas de cinema e séries por aqui!",
+        f"Também acho essa cena épica, @{autor}! 🤯 Valeu pelo carinho e conta pra mim: qual seu filme favorito da vida?",
+        f"Com certeza, @{autor}! 🍿✨ O cinema é cheio dessas histórias fascinantes. Compartilha com seus amigos cinéfilos!"
     ]
-    import random
     return random.choice(respostas_padrao)
 
 def verificar_e_responder_comentarios():
     """
     Busca os posts recentes no Instagram, verifica novos comentários
-    e responde usando IA (executado 2 vezes ao dia).
+    e responde usando IA (executado a cada 30 minutos).
     """
-    print("\n💬 [Auto-Responder] Verificando novos comentários nos posts...")
+    print("\n💬 [Auto-Responder Cinema] Verificando novos comentários nos posts...")
     
     if not config.INSTAGRAM_ACCOUNT_ID or not config.INSTAGRAM_ACCESS_TOKEN:
         print("⚠️ Credenciais do Instagram não configuradas.")
@@ -137,7 +141,7 @@ def verificar_e_responder_comentarios():
                     print(f"❌ Erro ao enviar resposta: {resp_reply}")
         
         salvar_comentarios_respondidos(respondidos)
-        print(f"💬 [Auto-Responder] Concluído! {novos_respondidos} novo(s) comentário(s) respondido(s).\n")
+        print(f"💬 [Auto-Responder Cinema] Concluído! {novos_respondidos} novo(s) comentário(s) respondido(s).\n")
 
     except Exception as e:
         print(f"❌ Exceção ao checar comentários: {e}")

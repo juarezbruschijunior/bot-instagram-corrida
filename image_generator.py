@@ -16,27 +16,14 @@ HISTORICO_FILE = os.path.join(BOT_DIR, "historico_fotos_postadas.json")
 
 os.makedirs(POSTS_DIR, exist_ok=True)
 
-# Catálogo de Curiosidades do Cinema & Séries com a Apresentadora Oficial e Pôsteres
+# Catálogo Oficial de Curiosidades do Cinema & Séries (100% Cinema, Pôsteres & Apresentadora)
 FOTOS_CINEMA_CATALOGO = [
-    # 🎬 BASTIDORES & CURIOSIDADES COM A APRESENTADORA E CENAS CLÁSSICAS
-    "cinema_star_trek_apresentadora.jpg",  # Star Trek - O Beijo Histórico que desafiou a censura
-    "cinema_interestelar.jpg",             # Interestelar - A física real do buraco negro
-    
-    # 🏃‍♀️ GALERIA FITNESS & LIFESTYLE DA APRESENTADORA
-    "aline_selfie_espelho_academia.jpg",
-    "aline_pose_orla_lifestyle.jpg",
-    "aline_corrida_orla.jpg",
-    "aline_prato_saudavel_almoco.jpg",
-    "aline_smoothie_preparacao.jpg",
-    "aline_esteira_academia.jpg",
-    "aline_cafe_da_manha_panqueca.jpg",
-    "aline_musculacao_leg_press.jpg",
-    "aline_medalha_corrida.jpg",
-    "aline_remada_baixa_costas.jpg",
-    "aline_prancha_abdominal.jpg",
-    "aline_smartwatch_pace.jpg",
-    "aline_pose_calcadao_fit.jpg",
-    "aline_pos_treino_relax.jpg",
+    "cinema_star_trek_apresentadora.jpg",     # Star Trek - O Beijo Histórico que desafiou a censura
+    "cinema_interestelar.jpg",                # Interestelar - A física real do buraco negro
+    "cinema_batman_cavaleiro_trevas.jpg",     # Batman - O improviso genial de Heath Ledger
+    "cinema_matrix.jpg",                      # Matrix - A verdade secreta sobre o código verde
+    "cinema_peaky_blinders.jpg",              # Peaky Blinders - O segredo por trás dos cigarros de Thomas Shelby
+    "cinema_senhor_dos_aneis.jpg",            # O Senhor dos Anéis - O grito real de dor de Viggo Mortensen
 ]
 
 def carregar_historico():
@@ -60,7 +47,7 @@ def salvar_historico(historico):
 def obter_proxima_foto_aline():
     """
     Sistema inteligente de rotação anti-repetição para Cinema & Séries.
-    Garante que CADA post use uma foto/pôster DIFERENTE da apresentadora e das curiosidades.
+    Garante que CADA post use uma foto/pôster DIFERENTE de cinema e nunca repete.
     """
     historico = carregar_historico()
     
@@ -71,7 +58,7 @@ def obter_proxima_foto_aline():
     ]
     
     if not fotos_existentes:
-        print("⚠️ Nenhuma foto do catálogo encontrada localmente em posts_gerados.")
+        print("⚠️ Nenhuma foto de cinema encontrada localmente em posts_gerados.")
         return None
 
     # Fotos que ainda não foram postadas no ciclo atual
@@ -80,23 +67,19 @@ def obter_proxima_foto_aline():
     # Se todas as fotos do catálogo já foram postadas, reinicia o ciclo
     if not fotos_nao_postadas:
         ultima_postada = historico[-1] if historico else None
-        print("🔄 Todas as fotos do catálogo foram publicadas! Reiniciando ciclo de rotação...")
+        print("🔄 Todas as curiosidades de cinema foram publicadas! Reiniciando ciclo de rotação...")
         candidatas = [f for f in fotos_existentes if f != ultima_postada] or fotos_existentes
         foto_escolhida = random.choice(candidatas)
         historico = [foto_escolhida]
     else:
-        # Se for o início, prioriza as novas de cinema
-        if "cinema_star_trek_apresentadora.jpg" in fotos_nao_postadas:
-            foto_escolhida = "cinema_star_trek_apresentadora.jpg"
-        else:
-            foto_escolhida = random.choice(fotos_nao_postadas)
+        foto_escolhida = random.choice(fotos_nao_postadas)
         historico.append(foto_escolhida)
 
     salvar_historico(historico)
     
     posicao = len(historico)
     total = len(fotos_existentes)
-    print(f"📸 [Rotação Anti-Repetição Cinema] Foto selecionada: {foto_escolhida} (Post {posicao}/{total} do ciclo)")
+    print(f"🎬 [Rotação Cinema] Pôster selecionado: {foto_escolhida} (Post {posicao}/{total} do ciclo)")
     
     return os.path.join(POSTS_DIR, foto_escolhida)
 
@@ -111,7 +94,7 @@ def fazer_upload_cdn(caminho_imagem):
 def gerar_imagem_persona(image_prompt=None, filename="post_imagem.jpg"):
     """
     Ponto de entrada chamado pelo publicador:
-    Seleciona a próxima foto inédita de cinema/apresentadora, envia para CDN e retorna a URL pronta.
+    Seleciona a próxima foto de cinema, envia para CDN e retorna a URL pronta.
     """
     foto_local = obter_proxima_foto_aline()
     

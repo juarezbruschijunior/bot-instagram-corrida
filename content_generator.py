@@ -2,35 +2,21 @@ import sys
 import os
 import json
 import random
-import config
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
-TEMAS_CINEMA_CURIOSIDADES = [
+BOT_DIR = os.path.dirname(__file__)
+HISTORICO_CINEMA_FILE = os.path.join(BOT_DIR, "historico_posts_cinema.json")
+
+# Pacote Oficial de Posts de Cinema (Imagem Exclusiva + Curiosidade 100% Sincronizada)
+PACOTE_POSTS_CINEMA = [
     {
-        "filme": "Jornada nas Estrelas (Star Trek)",
-        "subtitulo": "O beijo que desafiou a censura na TV em 1968",
-        "caption": """🖖 **Você sabia que Jornada nas Estrelas mudou a história do mundo em 1968?**
-
-Nos bastidores da série clássica de *Star Trek*, William Shatner (Capitão Kirk) e Nichelle Nichols (Tenente Uhura) gravaram o que se tornaria o primeiro beijo inter-racial da história da televisão americana! 📺✨
-
-Com medo da censura da época, os executivos da emissora exigiram que fosse gravada uma versão alternativa *sem o beijo*. Mas sabe o que William Shatner fez? Ele errou de propósito e fez caretas em TODAS as tomadas sem beijo, forçando a emissora a exibir a versão histórica com o beijo no ar!
-
-🤯 Martin Luther King Jr. chegou a ligar pessoalmente para Nichelle Nichols pedindo para ela nunca desistir da série, pois ela era um símbolo vivo de conquista e inspiração para milhões.
-
-━━━━━━━━━━━━━━━━━━━━━
-🎬 **Gostou da curiosidade? Siga @alin_emanuela para descobrir os maiores segredos do cinema e das séries todos os dias!**
-📌 *Salve este post para compartilhar com aquele amigo que ama ficção científica!*
-💬 *Qual é a sua série de ficção favorita de todos os tempos? Comenta aqui embaixo!* 👇🔥
-
-#startrek #jornadanasestrelas #curiosidadesdefilmes #cinema #seriesclassicas #ficcaocientifica #hollywood #bastidores #nerdbrasil #filmeseseries #cinefilos"""
-    },
-    {
+        "id": "interestelar",
         "filme": "Interestelar (2014)",
-        "subtitulo": "A física real por trás da cena do buraco negro",
+        "imagem": "cinema_interestelar.jpg",
         "caption": """🌊 **Você sabia que o barulho de fundo dessa cena conta o tempo real na Terra?**
 
 Na clássica cena do Planeta de Miller em *Interestelar (2014)*, um detalhe nos bastidores do áudio de Christopher Nolan e Hans Zimmer passou despercebido por 99% das pessoas:
@@ -49,8 +35,9 @@ Quando Cooper e Brand retornam para a nave e descobrem que se passaram **23 anos
 #interestelar #cinema #filmes #curiosidadesdefilmes #seriesefilmes #christophernolan #cinefilos #bastidores #astronomia #hollywood #filmeseseries #netflixbrasil"""
     },
     {
+        "id": "batman_cavaleiro_trevas",
         "filme": "Batman: O Cavaleiro das Trevas (2008)",
-        "subtitulo": "O improviso genial de Heath Ledger na prisão",
+        "imagem": "cinema_batman_cavaleiro_trevas.jpg",
         "caption": """🃏 **O improviso lendário de Heath Ledger que não estava no roteiro do Batman!**
 
 Na cena em que o Coringa está preso na delegacia de Gotham e o Comissário Gordon é promovido, todos os policiais começam a aplaudir. De repente, o Coringa começa a bater palmas de forma lenta, sarcástica e perturbadora. 👏
@@ -67,8 +54,9 @@ Aquilo **NÃO estava no roteiro original!** Foi uma ideia 100% espontânea de He
 #batman #ocavaleirodastrevas #heathledger #coringa #joker #christophernolan #dccomics #cinema #curiosidadesdefilmes #bastidores #filmeseseries"""
     },
     {
+        "id": "matrix",
         "filme": "Matrix (1999)",
-        "subtitulo": "A verdade secreta sobre o código verde que cai na tela",
+        "imagem": "cinema_matrix.jpg",
         "caption": """🟢 **Você sabe o que realmente está escrito no famoso código verde de Matrix?**
 
 Aquela clássica cascata de símbolos verdes que abre a trilogia *Matrix* parece uma sequência indecifrável de criptografia hacker ultra-avançada... Mas a verdade vai te surpreender! 💻
@@ -85,8 +73,28 @@ Portanto, quando Neo e Morpheus estão olhando para a tela cheia de códigos mis
 #matrix #keanureeves #filmes #curiosidadesdefilmes #cinema #ficcaocientifica #cyberpunk #bastidores #nerd #geekbrasil #culturapop"""
     },
     {
+        "id": "peaky_blinders",
+        "filme": "Peaky Blinders",
+        "imagem": "cinema_peaky_blinders.jpg",
+        "caption": """🥃 **Quantos cigarros Thomas Shelby realmente fumou em Peaky Blinders?**
+
+Quem assiste a *Peaky Blinders* sabe que o líder dos Blinders praticamente não passa um minuto em cena sem um cigarro aceso na boca. Mas você já parou para pensar na saúde do ator Cillian Murphy? 🚬
+
+Como as gravações duravam meses e tinham vários ângulos por cena, Cillian Murphy revelou que fumava cerca de **1.000 cigarros por temporada**!
+
+Para não prejudicar a saúde do ator, a equipe de figurino usava **cigarros 100% de ervas naturais e pétalas de rosa**, completamente livres de tabaco e nicotina.
+
+━━━━━━━━━━━━━━━━━━━━━
+🎬 **Siga @alin_emanuela para acompanhar dicas e curiosidades das suas séries favoritas!**
+📌 *Salve este post no seu feed!*
+💬 *Qual é o seu personagem favorito em Peaky Blinders?* 👇🔥
+
+#peakyblinders #thomasshelby #cillianmurphy #seriesnetflix #curiosidadesdeseries #netflixbrasil #cinema #bbc #seriesefilmes"""
+    },
+    {
+        "id": "senhor_dos_aneis",
         "filme": "O Senhor dos Anéis (2002)",
-        "subtitulo": "O grito real de dor de Viggo Mortensen que ficou no filme",
+        "imagem": "cinema_senhor_dos_aneis.jpg",
         "caption": """🗡️ **O grito real de agonia de Aragorn em O Senhor dos Anéis: As Duas Torres!**
 
 Em uma cena emocionante onde Aragorn acredita que Merry e Pippin foram mortos pelos Orcs, ele chuta com toda a força um capacete de ferro pesado e solta um grito desesperador caindo de joelhos. 💥
@@ -103,58 +111,70 @@ O diretor Peter Jackson ficou tão impressionado com o profissionalismo de Viggo
 #osenhordosaneis #lordoftherings #aragorn #viggomortensen #peterjackson #cinema #curiosidadesdefilmes #fantasia #hollywood #filmeseseries"""
     },
     {
-        "filme": "Peaky Blinders",
-        "subtitulo": "O segredo por trás dos cigarros de Thomas Shelby",
-        "caption": """🥃 **Quantos cigarros Thomas Shelby realmente fumou em Peaky Blinders?**
+        "id": "star_trek",
+        "filme": "Jornada nas Estrelas (Star Trek)",
+        "imagem": "cinema_star_trek_apresentadora.jpg",
+        "caption": """🖖 **Você sabia que Jornada nas Estrelas mudou a história do mundo em 1968?**
 
-Quem assiste a *Peaky Blinders* sabe que o líder dos Blinders praticamente não passa um minuto em cena sem um cigarro aceso na boca. Mas você já parou para pensar na saúde do ator Cillian Murphy? 🚬
+Nos bastidores da série clássica de *Star Trek*, William Shatner (Capitão Kirk) e Nichelle Nichols (Tenente Uhura) gravaram o que se tornaria o primeiro beijo inter-racial da história da televisão americana! 📺✨
 
-Como as gravações duravam meses e tinham vários ângulos por cena, Cillian Murphy revelou que fumava cerca de **1.000 cigarros por temporada**!
+Com medo da censura da época, os executivos da emissora exigiram que fosse gravada uma versão alternativa *sem o beijo*. Mas sabe o que William Shatner fez? Ele errou de propósito e fez caretas em TODAS as tomadas sem beijo, forçando a emissora a exibir a versão histórica com o beijo no ar!
 
-Para não prejudicar a saúde do ator, a equipe de figurino usava **cigarros 100% de ervas naturais e pétalas de rosa**, completamente livres de tabaco e nicotina.
+🤯 Martin Luther King Jr. chegou a ligar pessoalmente para Nichelle Nichols pedindo para ela nunca desistir da série, pois ela era um símbolo vivo de conquista e inspiração para milhões.
 
 ━━━━━━━━━━━━━━━━━━━━━
-🎬 **Siga @alin_emanuela para acompanhar dicas e curiosidades das suas séries favoritas!**
-📌 *Salve este post no seu feed!*
-💬 *Qual é o seu personagem favorito em Peaky Blinders?* 👇🔥
+🎬 **Gostou da curiosidade? Siga @alin_emanuela para descobrir os maiores segredos do cinema e das séries todos os dias!**
+📌 *Salve este post para compartilhar com aquele amigo que ama ficção científica!*
+💬 *Qual é a sua série de ficção favorita de todos os tempos? Comenta aqui embaixo!* 👇🔥
 
-#peakyblinders #thomasshelby #cillianmurphy #seriesnetflix #curiosidadesdeseries #netflixbrasil #cinema #bbc #seriesefilmes"""
+#startrek #jornadanasestrelas #curiosidadesdefilmes #cinema #seriesclassicas #ficcaocientifica #hollywood #bastidores #nerdbrasil #filmeseseries #cinefilos"""
     }
 ]
 
-def gerar_post_e_prompt(tema=None):
-    """
-    Gera curiosidades de alto impacto sobre Filmes e Séries clássicas e modernas,
-    otimizadas para compartilhamento, retenção e atração de novos seguidores.
-    """
-    if config.GEMINI_API_KEY and "AIza" in config.GEMINI_API_KEY:
+def carregar_historico_cinema():
+    if os.path.exists(HISTORICO_CINEMA_FILE):
         try:
-            from google import genai
-            client = genai.Client(api_key=config.GEMINI_API_KEY)
-            
-            prompt_sistema = """
-            Você é especialista em Cinema, Séries e Cultura Pop e redige conteúdos virais para o Instagram.
-            Crie um post de alto impacto e curiosidade fascinante sobre um grande filme ou série famosa (ex: Harry Potter, Oppenheimer, Breaking Bad, Stranger Things, Gladiador, Titanic, Vingadores, etc.).
-            
-            Estrutura obrigatória:
-            1. TÍTULO IMPACTANTE com emojis e pergunta misteriosa na 1ª linha.
-            2. HISTÓRIA DE BASTIDORES ou FATO CIENTÍFICO/SECRETO contado de forma envolvente em 3 a 4 parágrafos curtos.
-            3. GATILHO DE SEGUIDOR: '🎬 Siga @alin_emanuela para descobrir os maiores segredos e bastidores do cinema todos os dias!'
-            4. GATILHO DE SALVAMENTO: '📌 Salve este post para compartilhar com os amigos!'
-            5. PERGUNTA DE ENGAJAMENTO para estimular debates nos comentários.
-            6. 8 a 12 hashtags estratégicas de cinema e séries (#cinema #curiosidadesdefilmes #filmeseseries #bastidores, etc.).
-            
-            Retorne APENAS o texto pronto da legenda.
-            """
-            
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt_sistema
-            )
-            if response and response.text:
-                return {"caption": response.text.strip()}
-        except Exception as e:
-            print(f"[Aviso Gemini]: {e}. Usando template de curiosidades de cinema.")
+            with open(HISTORICO_CINEMA_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
 
-    escolhido = random.choice(TEMAS_CINEMA_CURIOSIDADES)
-    return {"caption": escolhido["caption"], "filme": escolhido.get("filme"), "subtitulo": escolhido.get("subtitulo")}
+def salvar_historico_cinema(historico):
+    try:
+        with open(HISTORICO_CINEMA_FILE, "w", encoding="utf-8") as f:
+            json.dump(historico, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"⚠️ Erro ao salvar histórico cinema: {e}")
+
+def obter_proximo_post_cinema():
+    """
+    Garante que CADA publicação seja um FILME/SÉRIE DIFERENTE com IMAGEM e LEGENDA 100% SINCRONIZADAS.
+    Nunca repete até que todos os filmes do pacote tenham sido postados!
+    """
+    historico = carregar_historico_cinema()
+    
+    # Filtra posts que ainda não foram publicados no ciclo atual
+    posts_disponiveis = [p for p in PACOTE_POSTS_CINEMA if p["id"] not in historico]
+    
+    if not posts_disponiveis:
+        print("🔄 Todos os filmes do pacote foram publicados! Reiniciando ciclo de rotação...")
+        ultimo_id = historico[-1] if historico else None
+        candidatos = [p for p in PACOTE_POSTS_CINEMA if p["id"] != ultimo_id] or PACOTE_POSTS_CINEMA
+        post_escolhido = random.choice(candidatos)
+        historico = [post_escolhido["id"]]
+    else:
+        post_escolhido = posts_disponiveis[0] # Segue fila sequencial ordenada
+        historico.append(post_escolhido["id"])
+
+    salvar_historico_cinema(historico)
+    
+    pos = len(historico)
+    total = len(PACOTE_POSTS_CINEMA)
+    print(f"🎬 [Fila Cinema Anti-Repetição] Filme: {post_escolhido['filme']} (Post {pos}/{total} do ciclo)")
+    
+    return post_escolhido
+
+def gerar_post_e_prompt(tema=None):
+    post = obter_proximo_post_cinema()
+    return post

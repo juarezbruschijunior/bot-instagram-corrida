@@ -91,37 +91,25 @@ from comment_responder import verificar_e_responder_comentarios
 
 def executar_ciclo_postagem(forcar_reels=False):
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"\n[{agora}] 🏃‍♀️ Iniciando ciclo de publicação do post...")
+    print(f"\n[{agora}] 🎬 Iniciando ciclo de publicação de Cinema & Séries...")
     
-    # 1. Gerar Conteúdo Persuasivo com Gemini
-    print("1️⃣ Gerando legenda estratégica e dicas com o Google Gemini IA...")
-    conteudo = gerar_post_e_prompt()
-    legenda = conteudo["caption"]
+    # 1. Seleciona o Próximo Filme Inédito da Fila (Anti-Repetição)
+    post_pacote = gerar_post_e_prompt()
+    legenda = post_pacote["caption"]
+    nome_imagem = post_pacote.get("imagem", "cinema_star_trek_apresentadora.jpg")
     
-    # 2. Selecionar Foto da Aline em Porto Alegre
-    print("2️⃣ Selecionando foto exclusiva da Aline em Porto Alegre...")
-    nome_arquivo = f"post_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
-    image_url, local_path = gerar_imagem_persona(filename=nome_arquivo)
+    bot_dir = os.path.dirname(__file__)
+    local_path = os.path.join(bot_dir, "posts_gerados", nome_imagem)
+    image_url = f"https://raw.githubusercontent.com/juarezbruschijunior/bot-instagram-corrida/main/posts_gerados/{nome_imagem}"
     
-    # Alterna entre Foto e Reels (Vídeo com Música Eletrônica Fitness)
-    # Por padrão, os posts da tarde/noite (ou com flag) viram Reels com música!
-    hora_atual = datetime.datetime.now().hour
-    postar_como_reels = forcar_reels or (hora_atual >= 12 and random.random() > 0.3)
+    print(f"🎬 [Cinema Selecionado] {post_pacote.get('filme', 'Filme')} | Imagem: {nome_imagem}")
+    print(f"☁️ Link CDN em Alta Definição: {image_url}")
     
     bot = MultiPlatformBot()
-    
-    if postar_como_reels and local_path:
-        print("🎬 [Modo Vídeo Reels] Gerando vídeo com batida eletrônica fitness...")
-        video_url, video_local = gerar_reels_com_musica(local_path, duracao=8)
-        if video_url:
-            sucesso = bot.publicar_todas(video_url, legenda, is_video=True)
-        else:
-            sucesso = bot.publicar_todas(image_url, legenda, is_video=False)
-    else:
-        sucesso = bot.publicar_todas(image_url, legenda, is_video=False)
+    sucesso = bot.publicar_todas(image_url, legenda, is_video=False)
     
     if sucesso:
-        print(f"[{agora}] ✅ Publicação concluída com sucesso nas redes!\n")
+        print(f"[{agora}] ✅ Publicação de Cinema concluída com sucesso no Instagram!\n")
     else:
         print(f"[{agora}] ❌ Falha no ciclo de postagem.\n")
 

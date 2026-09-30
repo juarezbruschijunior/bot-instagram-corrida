@@ -93,32 +93,12 @@ def obter_proxima_foto_aline():
 def fazer_upload_cdn(caminho_imagem):
     """
     Entrega a URL pública direta da imagem.
-    Prioriza a URL do servidor Render (estável e sem limites) com fallback para CDN Catbox.
+    Utiliza a CDN oficial do GitHub (Raw) que possui 100% de disponibilidade,
+    velocidade máxima e é aceita nativamente pela Meta / Instagram Graph API.
     """
     nome_arquivo = os.path.basename(caminho_imagem)
-    url_render = f"https://bot-instagram-corrida.onrender.com/media/{nome_arquivo}"
-    
-    # Testa se o servidor Render já responde por este arquivo
-    try:
-        r = requests.head(url_render, timeout=5)
-        if r.status_code == 200:
-            return url_render
-    except Exception:
-        pass
-
-    # Fallback para Catbox
-    try:
-        url = "https://catbox.moe/user/api.php"
-        with open(caminho_imagem, "rb") as f:
-            files = {"fileToUpload": f}
-            data = {"reqtype": "fileupload"}
-            resp = requests.post(url, files=files, data=data, timeout=15)
-            if resp.status_code == 200 and resp.text.startswith("http"):
-                return resp.text.strip()
-    except Exception as e:
-        print(f"⚠️ Erro ao enviar foto para CDN secundário: {e}")
-        
-    return url_render
+    url_github = f"https://raw.githubusercontent.com/juarezbruschijunior/bot-instagram-corrida/main/posts_gerados/{nome_arquivo}"
+    return url_github
 
 def gerar_imagem_persona(image_prompt=None, filename="post_imagem.jpg"):
     """

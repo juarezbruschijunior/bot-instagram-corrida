@@ -1,7 +1,7 @@
 @echo off
-title Bot Instagram - Planilha de Corrida
+title Bot Instagram - Curiosidades do Cinema e Series
 echo =======================================================
-echo Iniciando o Bot de Divulgacao de Planilha de Corrida...
+echo Iniciando o Bot de Cinema e Series (4x ao Dia)...
 echo =======================================================
 python main.py
 pause

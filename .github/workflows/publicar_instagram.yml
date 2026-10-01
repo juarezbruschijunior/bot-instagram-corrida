@@ -1,25 +1,25 @@
-name: Bot Instagram BioTools - Agendador Automatico
+name: Bot Instagram Cinema - Agendador Automatico 4x ao Dia
 
 on:
   schedule:
     # Horários em UTC (Brasil é UTC-3):
-    # 06:30 BRT = 09:30 UTC
-    # 10:30 BRT = 13:30 UTC (Responder Comentários)
-    # 12:15 BRT = 15:15 UTC
-    # 18:45 BRT = 21:45 UTC
-    # 19:30 BRT = 22:30 UTC (Responder Comentários)
-    - cron: '30 9 * * *'
-    - cron: '30 13 * * *'
-    - cron: '15 15 * * *'
-    - cron: '45 21 * * *'
-    - cron: '30 22 * * *'
+    # 08:30 BRT = 11:30 UTC
+    # 12:30 BRT = 15:30 UTC
+    # 17:30 BRT = 20:30 UTC
+    # 21:15 BRT = 00:15 UTC
+    - cron: '30 11 * * *'
+    - cron: '30 15 * * *'
+    - cron: '30 20 * * *'
+    - cron: '15 0 * * *'
+    # Ping a cada 10 minutos para manter o Render e respostas de comentários ativas
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 jobs:
-  executar_bot:
+  executar_bot_cinema:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar Codigo
+      - name: Baixar Codigo do Bot
         uses: actions/checkout@v3
 
       - name: Configurar Python
@@ -30,14 +30,15 @@ jobs:
       - name: Instalar Dependencias
         run: |
           pip install -r requirements.txt
-          sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Executar Ciclo do Bot
+      - name: Ping Keep-Alive no Render
+        run: |
+          curl -s -m 10 https://bot-instagram-corrida.onrender.com || true
+
+      - name: Executar Ciclo de Cinema / Respostas
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
-          LINK_PLANILHA: ${{ secrets.LINK_PLANILHA }}
         run: |
-          python main.py --test
-          python main.py --responder
+          python main.py --cron

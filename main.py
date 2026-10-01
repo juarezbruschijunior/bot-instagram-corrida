@@ -208,9 +208,33 @@ def main():
         executar_ciclo_postagem()
         return
 
-    if "--responder" in sys.argv or "-r" in sys.argv:
-        print("🔍 Modo de verificação de comentários selecionado.")
-        verificar_e_responder_comentarios()
+    if "--cron" in sys.argv:
+        print("🔍 Modo CRON / GitHub Actions selecionado.")
+        agora = obter_hora_brasilia()
+        hoje_str = agora.strftime("%Y-%m-%d")
+        minutos_agora = agora.hour * 60 + agora.minute
+        slots_executados = carregar_slots_executados()
+        
+        postou = False
+        for h_str in HORARIOS_POSTAGEM:
+            slot_id = f"{hoje_str}_{h_str}"
+            if slot_id not in slots_executados:
+                alvo_h, alvo_m = map(int, h_str.split(":"))
+                minutos_alvo = alvo_h * 60 + alvo_m
+                diferenca = minutos_agora - minutos_alvo
+                if 0 <= diferenca <= 35: # Janela de 35 minutos para o cron
+                    print(f"⏰ [CRON Horário: {h_str} BRT] Disparando postagem agendada!")
+                    slots_executados.add(slot_id)
+                    salvar_slots_executados(slots_executados)
+                    executar_ciclo_postagem()
+                    postou = True
+                    break
+                    
+        print("🔍 [CRON] Verificando comentários...")
+        try:
+            verificar_e_responder_comentarios()
+        except Exception as e:
+            print(f"⚠️ Erro comentários: {e}")
         return
 
     # Inicia servidor web em segundo plano para o Render
